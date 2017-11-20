@@ -174,7 +174,7 @@ class IndicatorBackup:
                 self.next_time(self)
                 command=['bash', self.script, 'backup_folder']
                 result = run(command, stdout=PIPE, stderr=PIPE, universal_newlines=False)
-                self.folder=str(result.stdout)[2:][:-3]
+                self.folder=str(result.stdout)[2:][:-3]+'.snapshot/'
                 if len(self.folder) == 0:
                    self.hide_gotobackup()
             if str(self.result.returncode) == '1':
