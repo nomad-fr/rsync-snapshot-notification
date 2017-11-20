@@ -33,7 +33,7 @@ BACKUP_FOLDER=/media/gobt/Backup-houyo               # can be empty - autofs nee
 ###################################
 
 US=marty
-HOST=192.168.0.7
+HOST=bigfish
 PORT=22
 USHOST=$US@$HOST
 DST=$USHOST:/snob/backup/laptop
