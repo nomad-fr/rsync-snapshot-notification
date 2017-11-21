@@ -23,7 +23,12 @@ else
     EXCLUDE_FILE="/home/nomad/bin/exclude-backup-laptop" # list of exluded files  
           # EXCLUDE_FILE : Specifies a FILE that contains exclude patterns (one per line).
           #                Blank lines in the file and lines starting with ; or # are ignored.
-    BACKUP_FOLDER=/media/gobt/Backup-saahre		 # autofs mount point : can be unset
+          # ex of an "EXCLUDE_FILE" file :
+	  #  .thumbnails
+	  #  .googlearth
+	  #  .cache
+	  #  .gnome2/keyrings/trash
+    BACKUP_FOLDER=""		 # autofs mount point : can be unset
     	  # install and configure autofs
 	  # add this to /etc/auto.master
 	  # /media/backup-Sismo                         /etc/auto.backup --ghost,--timeout=60
