@@ -169,18 +169,20 @@ class IndicatorBackup:
         with self.lock:
             command=[self.script, 'last']
             self.result = run(command, stdout=PIPE, stderr=PIPE, universal_newlines=False)
-            if str(self.result.returncode) == '0':
-                self.set_ok_status(self)
-                self.next_time(self)
-                command=['bash', self.script, 'backup_folder']
-                result = run(command, stdout=PIPE, stderr=PIPE, universal_newlines=False)
-                self.folder=str(result.stdout)[2:][:-3]
-                if len(self.folder) == 0:
-                   self.hide_gotobackup()
-            if str(self.result.returncode) == '1':
-                self.set_notok_status(self)            
-            return True
-        
+            print(len(str(self.result.stderr)))
+            if len(str(self.result.stderr)) == 3:
+                if str(self.result.returncode) == '0':
+                    self.set_ok_status(self)
+                    self.next_time(self)
+                    command=['bash', self.script, 'backup_folder']
+                    result = run(command, stdout=PIPE, stderr=PIPE, universal_newlines=False)
+                    self.folder=str(result.stdout)[2:][:-3]
+                    if len(self.folder) == 0:
+                        self.hide_gotobackup()
+                if str(self.result.returncode) == '1':
+                    self.set_notok_status(self)
+                return True
+            
     def handler_menu_exit(self, evt):
         #self.thread_backup.exit()
         gtk.main_quit()

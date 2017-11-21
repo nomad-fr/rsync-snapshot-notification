@@ -14,16 +14,13 @@
 ###################################
     
 
-<<<<<<< HEAD
 SRC=~ # source dir to backup ~ is users home
 CLEF=~/.ssh/id_rsa_backup-bigfish # backup key to use
-VOL=saahre # destination volume
+VOL=houyo # destination volume
 EXCLUDE_FILE="/home/nomad/bin/exclude-backup-laptop" # list of exluded files  
 BACKUP_FOLDER=/media/gobt/Backup-saahre
-=======
 # backup key to use
 CLEF=~/.ssh/id_rsa_backup-bigfish
->>>>>>> d0abe3970d4e73e90acc8fe7da33053f2fb7706b
 
 # EXCLUDE_FILE : Specifies a FILE that contains exclude patterns (one per line).
 #                Blank lines in the file and lines starting with ';' or '#' are ignored.
@@ -67,11 +64,7 @@ then
 	then
 	    if [ "$1" = "last" ]
 	    then
-		last=$(ssh -i $CLEF $USHOST '/home/marty/getlastsnap.sh '$VOL)
-		if [ -z "$last" ]
-		then
-		    last='none'
-		fi
+		ssh -i $CLEF $USHOST '/home/marty/getlastsnap.sh '$VOL
 		exit 0
 	    elif [ "$1" = "host" ]
 	    then
