@@ -17,7 +17,7 @@
 SRC=~
 
 # backup key to use
-CLEF=~/.ssh/id_rsa_backup-gobt
+CLEF=~/.ssh/id_rsa_backup-bigfish
 
 # destination volume
 VOL=houyo
@@ -40,10 +40,10 @@ BACKUP_FOLDER=/media/gobt/Backup-houyo
 ###################################
 
 US=marty
-HOST=192.168.0.7
+HOST=bigfish
 PORT=22
 USHOST=$US@$HOST
-DST=$USHOST:/snob/backup/laptop
+DST=$USHOST:/dam/capsule/zfs
 
 if [ ! -e $EXCLUDE_FILE ]
 then EXCLUDE_FILE=""
