@@ -6,24 +6,20 @@
 #       then launch a remote snapshot on DST
 # Usage: ./backup-laptop-sismo.sh
 # Author: Michel Le Cocq <lecocq@ipgp.fr>
-# Update: 23.10.2017
+# Update: 20.11.2017
 ######################################
 
 ###################################
 ## USER ENV SETTING TO be ADJUST ##
 ###################################
     
-# source dir to backup ~ is users home
-SRC=~
 
-# backup key to use
-CLEF=~/.ssh/id_rsa_backup-gobt
+SRC=~ # source dir to backup ~ is users home
+CLEF=~/.ssh/id_rsa_backup-bigfish # backup key to use
+VOL=saahre # destination volume
+EXCLUDE_FILE="/home/nomad/bin/exclude-backup-laptop" # list of exluded files  
+BACKUP_FOLDER=/media/gobt/Backup-saahre
 
-# destination volume
-VOL=houyo
-
-# list of exluded files
-EXCLUDE_FILE="/home/nomad/bin/exclude-backup-laptop"   
 # EXCLUDE_FILE : Specifies a FILE that contains exclude patterns (one per line).
 #                Blank lines in the file and lines starting with ';' or '#' are ignored.
 
@@ -33,14 +29,12 @@ EXCLUDE_FILE="/home/nomad/bin/exclude-backup-laptop"
 # add this to /etc/auto.backup
 # Backup-houyo	 -fstype=nfs,ro,intr    192.168.0.7:/snob/backup/laptop/houyo
 
-BACKUP_FOLDER=/media/gobt/Backup-houyo
-
 ###################################
 ##    NOTHING TO CHANGE BELOW    ##
 ###################################
 
 US=marty
-HOST=192.168.0.7
+HOST=bigfish
 PORT=22
 USHOST=$US@$HOST
 DST=$USHOST:/snob/backup/laptop
@@ -68,7 +62,11 @@ then
 	then
 	    if [ "$1" = "last" ]
 	    then
-		ssh -i $CLEF $USHOST '/home/marty/getlastsnap.sh '$VOL
+		last=$(ssh -i $CLEF $USHOST '/home/marty/getlastsnap.sh '$VOL)
+		if [ -z "$last" ]
+		then
+		    last='none'
+		fi
 		exit 0
 	    elif [ "$1" = "host" ]
 	    then
@@ -93,7 +91,7 @@ then
 		printf 'snapshost Done :  backup finish\n'
 	    else
 		printf '\n['$0'] : rsync trouble no snapshot\n';
-		/home/nomad/bin/send_notify.sh -t 'backup NeuronFarm' -m 'rsync trouble : no snapshot'
+		#/home/nomad/bin/send_notify.sh -t 'backup NeuronFarm' -m 'rsync trouble : no snapshot'
 		help;
 	    fi
 	else
