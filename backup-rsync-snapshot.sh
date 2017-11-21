@@ -20,18 +20,19 @@ else
     SRC=~						 # source dir to backup here ~ means users home
     CLEF=~/.ssh/id_rsa_backup-bigfish  	       	         # backup ssh key to use (the one you send to your admin)
     VOL=houyo 			                         # final destination volume name (name given by admin)
-    EXCLUDE_FILE="/home/nomad/bin/exclude-backup-laptop" # list of exluded files  
+
+    HOST=bigfish					 # host use for backup
+    ZFS_VOL_DEST=dam/capsule/zfs			 # zfs vol name use for backup
+
+    EXCLUDE_FILE="" # file for exluded files  
           # EXCLUDE_FILE : Specifies a FILE that contains exclude patterns (one per line).
           #                Blank lines in the file and lines starting with ; or # are ignored.
-    BACKUP_FOLDER=/media/gobt/Backup-saahre		 # autofs mount point : can be unset
+    BACKUP_FOLDER=""		                         # autofs mount point : can be unset
     	  # install and configure autofs
 	  # add this to /etc/auto.master
 	  # /media/backup-Sismo                         /etc/auto.backup --ghost,--timeout=60
 	  # add this to /etc/auto.backup
 	  # Backup-houyo	 -fstype=nfs,ro,intr    bigfish:/snob/backup/laptop/houyo
-    CLEF=~/.ssh/id_rsa_backup-bigfish			 # backup key to use 
-    HOST=bigfish					 # host use for backup
-    ZFS_VOL_DEST=dam/capsule/zfs			 # zfs vol name use for backup
     
 '
     exit 1
