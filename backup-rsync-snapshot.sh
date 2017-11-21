@@ -32,7 +32,7 @@ else
 	  #  .googlearth
 	  #  .cache
 	  #  .gnome2/keyrings/trash
-    BACKUP_FOLDER=""		 # autofs mount point : can be unset
+    BACKUP_FOLDER=""		 # autofs mount point : can be unset : ex : /media/gobt/Backup-houyo/snapshot
     	  # install and configure autofs
 	  # add this to /etc/auto.master
 	  # /media/backup-Sismo                         /etc/auto.backup --ghost,--timeout=60
