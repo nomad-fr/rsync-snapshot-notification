@@ -14,11 +14,16 @@
 ###################################
     
 
+<<<<<<< HEAD
 SRC=~ # source dir to backup ~ is users home
 CLEF=~/.ssh/id_rsa_backup-bigfish # backup key to use
 VOL=saahre # destination volume
 EXCLUDE_FILE="/home/nomad/bin/exclude-backup-laptop" # list of exluded files  
 BACKUP_FOLDER=/media/gobt/Backup-saahre
+=======
+# backup key to use
+CLEF=~/.ssh/id_rsa_backup-bigfish
+>>>>>>> d0abe3970d4e73e90acc8fe7da33053f2fb7706b
 
 # EXCLUDE_FILE : Specifies a FILE that contains exclude patterns (one per line).
 #                Blank lines in the file and lines starting with ';' or '#' are ignored.
@@ -37,7 +42,7 @@ US=marty
 HOST=bigfish
 PORT=22
 USHOST=$US@$HOST
-DST=$USHOST:/snob/backup/laptop
+DST=$USHOST:/dam/capsule/zfs
 
 if [ ! -e $EXCLUDE_FILE ]
 then EXCLUDE_FILE=""
