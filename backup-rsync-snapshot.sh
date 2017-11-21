@@ -9,37 +9,38 @@
 # Update: 20.11.2017
 ######################################
 
-###################################
-## USER ENV SETTING TO be ADJUST ##
-###################################
+config=$(basename "$0" .sh).conf
+if [ -e $config ]
+then
+    source ./$config
+else
+    printf 'fill config file : '$config'\n'
+    printf 'like this :
+
+    SRC=~						 # source dir to backup here ~ means users home
+    CLEF=~/.ssh/id_rsa_backup-bigfish  	       	         # backup ssh key to use (the one you send to your admin)
+    VOL=houyo 			                         # final destination volume name (name given by admin)
+    EXCLUDE_FILE="/home/nomad/bin/exclude-backup-laptop" # list of exluded files  
+          # EXCLUDE_FILE : Specifies a FILE that contains exclude patterns (one per line).
+          #                Blank lines in the file and lines starting with ; or # are ignored.
+    BACKUP_FOLDER=/media/gobt/Backup-saahre		 # autofs mount point : can be unset
+    	  # install and configure autofs
+	  # add this to /etc/auto.master
+	  # /media/backup-Sismo                         /etc/auto.backup --ghost,--timeout=60
+	  # add this to /etc/auto.backup
+	  # Backup-houyo	 -fstype=nfs,ro,intr    bigfish:/snob/backup/laptop/houyo
+    CLEF=~/.ssh/id_rsa_backup-bigfish			 # backup key to use 
+    HOST=bigfish					 # host use for backup
+    ZFS_VOL_DEST=dam/capsule/zfs			 # zfs vol name use for backup
     
-
-SRC=~ # source dir to backup ~ is users home
-CLEF=~/.ssh/id_rsa_backup-bigfish # backup key to use
-VOL=houyo # destination volume
-EXCLUDE_FILE="/home/nomad/bin/exclude-backup-laptop" # list of exluded files  
-BACKUP_FOLDER=/media/gobt/Backup-saahre
-# backup key to use
-CLEF=~/.ssh/id_rsa_backup-bigfish
-
-# EXCLUDE_FILE : Specifies a FILE that contains exclude patterns (one per line).
-#                Blank lines in the file and lines starting with ';' or '#' are ignored.
-
-# install autofs
-# add this to /etc/auto.master
-# /media/backup-Sismo                         /etc/auto.backup --ghost,--timeout=60
-# add this to /etc/auto.backup
-# Backup-houyo	 -fstype=nfs,ro,intr    192.168.0.7:/snob/backup/laptop/houyo
-
-###################################
-##    NOTHING TO CHANGE BELOW    ##
-###################################
+'
+    exit 1
+fi
 
 US=marty
-HOST=bigfish
 PORT=22
 USHOST=$US@$HOST
-DST=$USHOST:/dam/capsule/zfs
+DST=$USHOST:/$ZFS_VOL_DEST
 
 if [ ! -e $EXCLUDE_FILE ]
 then EXCLUDE_FILE=""
