@@ -18,7 +18,7 @@ import threading
 import time, datetime
 import locale, sys
 
-icon_path = os.path.dirname(os.path.dirname(__file__) + '/icon-backup-notification/') + '/'
+icon_path = os.path.abspath("./icon-backup-notification/") + '/'
 
 class IndicatorBackup:
     def __init__(self):
